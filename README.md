@@ -1,1 +1,0 @@
-# gordonchang.github.io
