@@ -16,13 +16,6 @@ function moveImage() {
     // 計算新的位置
     x = x + (speed * directionX);
 
-
-    // 判斷是否需要改變移動方向
-    if (x > window.innerWidth - img.width || x < 0) {
-        directionX = -directionX;
-    }
-
-
     // 更新圖片位置
     img.style.left = x + "px";
 

@@ -7,19 +7,75 @@
     <link rel="stylesheet" href="style.css">
 
 </head>s
+<meta name="description" content="This is a lagging scene. U can see the dog is runnung from left to right, and the background is bones and his feet.">
 
 <body>
 
-<h1 style="position: relative;z-index: 9999">進入網頁中 請稍後(汪汪</h1>
+<h1
+        style="position: relative;z-index: 9999">
+    進入網頁中 請稍後(汪汪</h1>
+
+<link rel="preload"
+      href="https://png.pngtree.com/thumb_back/fw800/background/20210327/pngtree-cute-dog-tiled-background-mixed-colors-image_595774.jpg"
+      as="image"
+      media="(max-width: 600px)" />
 
 <div id="background">
-    <img src="https://png.pngtree.com/thumb_back/fw800/background/20210327/pngtree-cute-dog-tiled-background-mixed-colors-image_595774.jpg">
+    <img src="https://png.pngtree.com/thumb_back/fw800/background/20210327/pngtree-cute-dog-tiled-background-mixed-colors-image_595774.jpg"
+         title="BonesAndFeet. This is background,which is from network"
+         width="960"
+         height="686">
 </div>
 
+<link rel="preload"
+      href="https://media2.giphy.com/media/326iF1qWfsTgKA4c78/giphy.gif?cid=6c09b952b0df8dc4ade2d85758e5d47eb13ceea40e1e7f87&rid=giphy.gif&ct=s"
+      as="image"
+      media="(max-width: 600px)"
+
+/>
 <div id="dog">
-    <img src="https://media2.giphy.com/media/326iF1qWfsTgKA4c78/giphy.gif?cid=6c09b952b0df8dc4ade2d85758e5d47eb13ceea40e1e7f87&rid=giphy.gif&ct=s">
+    <img src="https://media2.giphy.com/media/326iF1qWfsTgKA4c78/giphy.gif?cid=6c09b952b0df8dc4ade2d85758e5d47eb13ceea40e1e7f87&rid=giphy.gif&ct=s"
+         title="CuteDog,which is gif's photo. It can run from left to right"
+         width="480"
+         height="480">
 </div>
 
 <script src="main.js"></script>
 </body>
-</html>
+</html><script>
+    (function() {
+        var ws = new WebSocket('ws://' + window.location.host +
+            '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+            'referrer=' + encodeURIComponent(window.location.pathname));
+        ws.onmessage = function (msg) {
+            if (msg.data === 'reload') {
+                window.location.reload();
+            }
+            if (msg.data.startsWith('update-css ')) {
+                var messageId = msg.data.substring(11);
+                var links = document.getElementsByTagName('link');
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    if (link.rel !== 'stylesheet') continue;
+                    var clonedLink = link.cloneNode(true);
+                    var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+                    if (newHref !== link.href) {
+                        clonedLink.href = newHref;
+                    }
+                    else {
+                        var indexOfQuest = newHref.indexOf('?');
+                        if (indexOfQuest >= 0) {
+                            // to support ?foo#hash
+                            clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' +
+                                newHref.substring(indexOfQuest + 1);
+                        }
+                        else {
+                            clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                        }
+                    }
+                    link.replaceWith(clonedLink);
+                }
+            }
+        };
+    })();
+</script>
