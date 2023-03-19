@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;  /* 去掉網頁主體的預設外邊距 */
+}
+
+/* 設置網頁字體樣式 */
+html {
+    /* 使用指定字體，如果無法加載則依次使用後面的備選字體 */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;  /* 將 HTML 根元素高度設置為 100% */
+}
+
+/* 設置網頁主體樣式 */
+body {
+    overflow: hidden;  /* 隱藏主體內容溢出的部分 */
+    height: inherit;  /* 繼承父元素 HTML 的高度 */
+}
+
+h1 {
+    font-size: 2rem;  /* 設置標題字體大小 */
+    letter-spacing: -2px;  /* 設置字母間距 */
+    position: absolute;
+    margin: 0 ; /* 设置左右 margin 为自动，以水平居中元素 */
+    top:500px;
+    left: 600px;
+    color: orangered;
+    text-shadow: 0 0 4px white;  /* 為標題添加文本陰影，讓其看起來更加突出 */
+}
+
+#background {
+    position: absolute;
+    right: 300px;
+    transform: scale(1.7);
+}
+
+#dog{
+    position: absolute;
+    /*top:100px;
+    left: 500px;*/
+}
+
+
+/* 設置網頁標題樣式 */
